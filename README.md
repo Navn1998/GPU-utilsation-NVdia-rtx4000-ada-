@@ -35,7 +35,8 @@ Run the script in the background:
 
 View logs: 
 tail -f gpu_metrics.log
-Stop the script once doen: 
+
+Stop the script once done: 
 killall gpu_monitor.sh
 
 Sample output: 
