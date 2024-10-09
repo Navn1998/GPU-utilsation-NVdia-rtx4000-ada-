@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Log file to store the metrics
+LOG_FILE="gpu_metrics.log"
+
+# Create or clear the log file
+echo "Timestamp, GPU Utilization (%), Memory Usage (MB), GPU Temperature (C), vCPU Usage (%), Memory Usage (%)" > $LOG_FILE
+
+# Infinite loop to monitor GPU and system stats
+while true; do
+    # Get timestamp
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+    # Get GPU utilization, memory usage, and temperature from nvidia-smi
+    GPU_STATS=$(nvidia-smi --query-gpu=utilization.gpu,memory.used,temperature.gpu --format=csv,noheader,nounits)
+    
+    # Get CPU usage (in percentage) from top command
+    CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}')
+    
+    # Get memory usage (in percentage) from free command
+    MEM_USAGE=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
+
+    # Format the GPU_STATS into variables
+    GPU_UTIL=$(echo $GPU_STATS | awk -F ',' '{print $1}')
+    MEM_USED=$(echo $GPU_STATS | awk -F ',' '{print $2}')
+    TEMP=$(echo $GPU_STATS | awk -F ',' '{print $3}')
+    
+    # Log the data to the log file
+    echo "$TIMESTAMP, $GPU_UTIL, $MEM_USED, $TEMP, $CPU_USAGE, $MEM_USAGE" >> $LOG_FILE
+    
+    # Sleep for 10 seconds before the next iteration
+    sleep 10
+done
