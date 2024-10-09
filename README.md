@@ -24,7 +24,7 @@ Installing Nvidia drivers if not already done:
 
 SETUP INSTRUCTIONS: 
 
-`git clone https://github.com/Navn1998/gpu-monitoring-script.git`
+Copy the script from here and create a new folder gpu-monitoring-script and paste this script in a file there. The commands for this can vary depending on the OS, kindly refer to docs to help you create the folder. Once created provide necessary permissions to the script and make it executable and run the script. 
 
 `cd gpu-monitoring-script`
 
