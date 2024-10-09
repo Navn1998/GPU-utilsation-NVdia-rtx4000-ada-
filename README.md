@@ -24,8 +24,8 @@ Installing Nvidia drivers if not already done:
 
 SETUP INSTRUCTIONS: 
 
-git clone https://github.com/Navn1998/gpu-monitoring-script.git
-cd gpu-monitoring-script
+`git clone https://github.com/Navn1998/gpu-monitoring-script.git
+cd gpu-monitoring-script`
 
 Make script executable: 
 chmod +x gpu_monitor.sh
